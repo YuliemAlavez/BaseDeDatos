@@ -4,9 +4,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class AgregarElemento extends ActionBarActivity {
+
+    private EditText nombre,apellido,telefono,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +40,44 @@ public class AgregarElemento extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void limpiar(View view){
+        nombre.setText("");
+        apellido.setText("");
+        telefono.setText("");
+        email.setText("");
+    }
+    public void agregar(View view){
+        //Declaramos variables
+
+        /*String nombre,apellido,telefono,email;
+
+        //Obtenemos Texto de los TextEdit
+        nombre=this.nombre.getText().toString();
+        apellido=this.apellido.getText().toString();
+        telefono=this.telefono.getText().toString();
+        email=this.email.getText().toString();
+*/
+
+        //Creamos el Objeto para acceder a la BD
+        ConexionBaseDeDatos ObjCnx = new ConexionBaseDeDatos(this);
+
+        ObjCnx.abrirConexion(); //Abrimos Conexión
+        String a="hola";
+        //Ejecuta el método para Insertar Datos
+        if(ObjCnx.insertar(a,a,a,a)==true){
+            String texto ="Elemento Agregado Corectamente";
+            Toast toast = Toast.makeText(this, texto, Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else{
+            String texto ="Error al Agregar Elemento";
+            Toast toast = Toast.makeText(this, texto, Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        //Cerramos Conexión
+
+        ObjCnx.cerrarConexion();
     }
 }
